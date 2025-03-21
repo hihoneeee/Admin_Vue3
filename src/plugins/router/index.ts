@@ -1,90 +1,96 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+// Lấy tất cả các file Vue trong thư mục pages
 const pages = import.meta.glob("/src/pages/**/*.vue");
 
 function buildRoutesFromPages() {
-  const layouts = {};
-  const standaloneRoutes = [];
+  // Định nghĩa các layout
+  const layouts = {
+    admin: {
+      path: "/admin",
+      name: "admin",
+      component: () => import("@/pages/admin/layout.vue"),
+      children: [],
+    },
+    // Layout mặc định cho public (không có tiền tố)
+    public: {
+      path: "/",
+      name: "public",
+      component: () => import("@/pages/public/layout.vue"),
+      children: [],
+    },
+  };
 
-  // First pass: identify layout components
+  // Phân loại các routes
   Object.entries(pages).forEach(([filePath, component]) => {
-    const layoutMatch = filePath.match(/\/src\/pages\/([^\/]+)\/index\.vue$/);
-    if (layoutMatch) {
-      const layoutName = layoutMatch[1];
-      layouts[layoutName] = {
-        path: `/${layoutName}`,
-        name: layoutName,
-        component: component,
-        children: [],
-      };
-      console.log(`Found layout: ${layoutName} - ${filePath}`);
-    }
-  });
-
-  console.log("All pages:", Object.keys(pages));
-
-  // Second pass: organize routes into layouts or standalone
-  Object.entries(pages).forEach(([filePath, component]) => {
-    // Skip layout index files (already processed)
-    if (filePath.match(/\/src\/pages\/([^\/]+)\/index\.vue$/)) {
+    // Bỏ qua các file layout
+    if (filePath.endsWith("/layout.vue")) {
       return;
     }
 
-    // Convert file path to route path
+    // Chỉ xử lý các file page.vue
+    if (!filePath.endsWith("/page.vue")) {
+      return;
+    }
+
+    // Chuyển đổi đường dẫn file thành route path
     let routePath = filePath
       .replace("/src/pages", "")
-      .replace(/\.vue$/, "")
-      .replace(/\/index$/, "");
+      .replace(/\/page\.vue$/, "");
 
-    // Handle empty routes
+    // Xử lý route trống
     if (routePath === "") routePath = "/";
 
-    // Check if this belongs to a layout
-    const layoutMatch = routePath.match(/^\/([^\/]+)/);
-
-    if (layoutMatch && layouts[layoutMatch[1]]) {
-      const layoutName = layoutMatch[1];
-      // Extract the child path (everything after the layout name)
-      let childPath = routePath.substring(layoutName.length + 1) || "";
-
-      // Important fix: Remove leading slash if present
-      if (childPath.startsWith("/")) {
-        childPath = childPath.substring(1);
-      }
-
-      // Create route name that's more specific
+    // Kiểm tra nếu route thuộc layout admin
+    if (routePath.startsWith("/admin")) {
+      const childPath =
+        routePath.replace("/admin", "").replace(/^\//, "") || "dashboard";
       const routeSegments = routePath.split("/").filter(Boolean);
-      const routeName = `${layoutName}-${routeSegments.slice(1).join("-")}`;
+      const routeName =
+        routeSegments.length > 1
+          ? `admin-${routeSegments.slice(1).join("-")}`
+          : "admin-dashboard";
 
-      layouts[layoutName].children.push({
+      layouts.admin.children.push({
         path: childPath,
-        name: routeName || `${layoutName}-default`,
-        component: component,
+        name: routeName,
+        component,
       });
 
       console.log(
-        `Added child route: '${childPath}' to layout: ${layoutName} with name: ${routeName}`
+        `Added admin child route: '${childPath}' with name: ${routeName}`
       );
-    } else {
-      // This is a standalone route
-      standaloneRoutes.push({
-        path: routePath,
-        name: routePath.replace(/\//g, "-").substring(1) || "home",
-        component: component,
+    }
+    // Xử lý các route public (không có tiền tố /admin)
+    else {
+      // Kiểm tra xem path có bắt đầu bằng / không
+      const normalizedPath = routePath.startsWith("/")
+        ? routePath.substring(1)
+        : routePath;
+
+      // Tạo route name từ segments
+      const routeSegments = normalizedPath.split("/").filter(Boolean);
+      const routeName = routeSegments.length ? routeSegments.join("-") : "home";
+
+      layouts.public.children.push({
+        path: normalizedPath,
+        name: routeName,
+        component,
       });
+
+      console.log(
+        `Added public child route: '${normalizedPath}' with name: ${routeName}`
+      );
     }
   });
 
-  // Add default redirects for layouts with proper redirect path
-  Object.keys(layouts).forEach((layoutName) => {
-    if (layouts[layoutName].children.length > 0) {
-      // Find the first child that's not a redirect itself
-      const firstRealChild = layouts[layoutName].children.find(
-        (child) => !child.redirect
-      );
+  // Thêm redirect mặc định cho các layout
+  Object.values(layouts).forEach((layout) => {
+    if (layout.children.length > 0) {
+      const firstRealChild = layout.children.find((child) => !child.redirect);
 
       if (firstRealChild) {
-        layouts[layoutName].children.unshift({
+        layout.children.unshift({
           path: "",
           redirect: { name: firstRealChild.name },
         });
@@ -92,8 +98,22 @@ function buildRoutesFromPages() {
     }
   });
 
-  return [...standaloneRoutes, ...Object.values(layouts)];
+  // Chỉ trả về các layout có children
+  const finalRoutes = Object.values(layouts).filter(
+    (layout) => layout.children.length > 0
+  );
+
+  // Thêm route 404 nếu cần
+  finalRoutes.push({
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: () => import("@/components/common/404.vue"),
+    children: [],
+  });
+
+  return finalRoutes;
 }
+
 const routes = buildRoutesFromPages();
 console.log("Final routes:", JSON.stringify(routes, null, 2));
 

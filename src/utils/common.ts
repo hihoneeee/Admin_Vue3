@@ -1,3 +1,5 @@
+import { ref } from "vue";
+
 export const dataUsers = [
   {
     id: 1,
@@ -120,3 +122,74 @@ export const dataUsers = [
     avatar: "https://randomuser.me/api/portraits/men/15.jpg",
   },
 ];
+
+const menuItems = ref([
+  {
+    title: "Dashboard",
+    icon: "mdi-view-dashboard-outline",
+    value: "dashboard",
+    to: "/admin/dash-board",
+  },
+  {
+    title: "Users",
+    icon: "mdi-account-group-outline",
+    value: "users",
+    children: [
+      {
+        title: "List Users",
+        icon: "mdi-account-multiple",
+        value: "list-users",
+        to: "/admin/user",
+      },
+      {
+        title: "Create User",
+        icon: "mdi-account-plus",
+        value: "create-user",
+        to: "/admin/user/create",
+      },
+    ],
+  },
+  {
+    title: "Products",
+    icon: "mdi-package-variant-closed",
+    value: "products",
+    children: [
+      {
+        title: "Product List",
+        icon: "mdi-view-list",
+        value: "list-products",
+        to: "/admin/products",
+      },
+      {
+        title: "Add Product",
+        icon: "mdi-plus-circle",
+        value: "add-product",
+        to: "/admin/products/create",
+      },
+      {
+        title: "Categories",
+        icon: "mdi-tag-multiple",
+        value: "categories",
+        to: "/admin/categories",
+      },
+    ],
+  },
+  {
+    title: "Orders",
+    icon: "mdi-cart-outline",
+    value: "orders",
+    to: "/admin/orders",
+  },
+  {
+    title: "Analytics",
+    icon: "mdi-chart-bar",
+    value: "analytics",
+    to: "/admin/analytics",
+  },
+  {
+    title: "Settings",
+    icon: "mdi-cog-outline",
+    value: "settings",
+    to: "/admin/settings",
+  },
+]);
