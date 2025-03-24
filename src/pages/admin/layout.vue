@@ -93,7 +93,7 @@ onMounted(() => {
 }
 
 .content-wrapper {
-  min-height: calc(100vh - 128px); /* Full height minus header and footer */
+  min-height: calc(100vh - 128px);
 }
 
 /* For dark theme */

@@ -1,24 +1,32 @@
 <template>
   <div>
-    <h2 class="text-h4 mb-6">Dashboard</h2>
-
-    <v-row>
-      <!-- Total Users -->
+    <h2 class="text-h5 font-weight-medium mb-6">Dashboard</h2>
+    <VRow>
       <v-col cols="12" sm="6" lg="3">
-        <v-card class="dashboard-card">
-          <v-card-text>
-            <div class="d-flex align-center">
+        <v-card flat border class="rounded-lg">
+          <v-card-text class="pa-5">
+            <div class="d-flex align-center justify-space-between">
               <div>
-                <div class="text-overline mb-1">TOTAL USERS</div>
-                <div class="text-h4">2,845</div>
-                <div class="text-caption text-success">
-                  <v-icon size="small" color="success">mdi-arrow-up</v-icon>
-                  12% from last month
+                <div class="text-subtitle-2 text-grey-darken-1 mb-1">
+                  TOTAL USERS
+                </div>
+                <div class="text-h4 font-weight-medium">2,845</div>
+                <div class="d-flex align-center mt-1">
+                  <v-icon size="small" color="success" class="me-1"
+                    >mdi-arrow-up</v-icon
+                  >
+                  <span class="text-caption text-success font-weight-medium"
+                    >12% from last month</span
+                  >
                 </div>
               </div>
-              <v-spacer></v-spacer>
-              <v-avatar color="primary" rounded size="50" class="elevation-1">
-                <v-icon size="28" color="white">mdi-account-group</v-icon>
+              <v-avatar
+                color="primary"
+                rounded="lg"
+                size="48"
+                class="d-flex align-center justify-center"
+              >
+                <v-icon size="24" color="white">mdi-account-group</v-icon>
               </v-avatar>
             </div>
           </v-card-text>
@@ -27,20 +35,30 @@
 
       <!-- Total Revenue -->
       <v-col cols="12" sm="6" lg="3">
-        <v-card class="dashboard-card">
-          <v-card-text>
-            <div class="d-flex align-center">
+        <v-card flat border class="rounded-lg">
+          <v-card-text class="pa-5">
+            <div class="d-flex align-center justify-space-between">
               <div>
-                <div class="text-overline mb-1">TOTAL REVENUE</div>
-                <div class="text-h4">$48,290</div>
-                <div class="text-caption text-success">
-                  <v-icon size="small" color="success">mdi-arrow-up</v-icon>
-                  8.5% from last month
+                <div class="text-subtitle-2 text-grey-darken-1 mb-1">
+                  TOTAL REVENUE
+                </div>
+                <div class="text-h4 font-weight-medium">$48,290</div>
+                <div class="d-flex align-center mt-1">
+                  <v-icon size="small" color="success" class="me-1"
+                    >mdi-arrow-up</v-icon
+                  >
+                  <span class="text-caption text-success font-weight-medium"
+                    >8.5% from last month</span
+                  >
                 </div>
               </div>
-              <v-spacer></v-spacer>
-              <v-avatar color="success" rounded size="50" class="elevation-1">
-                <v-icon size="28" color="white">mdi-currency-usd</v-icon>
+              <v-avatar
+                color="success"
+                rounded="lg"
+                size="48"
+                class="d-flex align-center justify-center"
+              >
+                <v-icon size="24" color="white">mdi-currency-usd</v-icon>
               </v-avatar>
             </div>
           </v-card-text>
@@ -49,20 +67,30 @@
 
       <!-- Orders -->
       <v-col cols="12" sm="6" lg="3">
-        <v-card class="dashboard-card">
-          <v-card-text>
-            <div class="d-flex align-center">
+        <v-card flat border class="rounded-lg">
+          <v-card-text class="pa-5">
+            <div class="d-flex align-center justify-space-between">
               <div>
-                <div class="text-overline mb-1">ORDERS</div>
-                <div class="text-h4">1,253</div>
-                <div class="text-caption text-success">
-                  <v-icon size="small" color="success">mdi-arrow-up</v-icon>
-                  5.2% from last month
+                <div class="text-subtitle-2 text-grey-darken-1 mb-1">
+                  ORDERS
+                </div>
+                <div class="text-h4 font-weight-medium">1,253</div>
+                <div class="d-flex align-center mt-1">
+                  <v-icon size="small" color="success" class="me-1"
+                    >mdi-arrow-up</v-icon
+                  >
+                  <span class="text-caption text-success font-weight-medium"
+                    >5.2% from last month</span
+                  >
                 </div>
               </div>
-              <v-spacer></v-spacer>
-              <v-avatar color="warning" rounded size="50" class="elevation-1">
-                <v-icon size="28" color="white">mdi-cart</v-icon>
+              <v-avatar
+                color="warning"
+                rounded="lg"
+                size="48"
+                class="d-flex align-center justify-center"
+              >
+                <v-icon size="24" color="white">mdi-cart</v-icon>
               </v-avatar>
             </div>
           </v-card-text>
@@ -71,26 +99,36 @@
 
       <!-- Visitors -->
       <v-col cols="12" sm="6" lg="3">
-        <v-card class="dashboard-card">
-          <v-card-text>
-            <div class="d-flex align-center">
+        <v-card flat border class="rounded-lg">
+          <v-card-text class="pa-5">
+            <div class="d-flex align-center justify-space-between">
               <div>
-                <div class="text-overline mb-1">VISITORS</div>
-                <div class="text-h4">45,678</div>
-                <div class="text-caption text-error">
-                  <v-icon size="small" color="error">mdi-arrow-down</v-icon>
-                  3.8% from last month
+                <div class="text-subtitle-2 text-grey-darken-1 mb-1">
+                  VISITORS
+                </div>
+                <div class="text-h4 font-weight-medium">45,678</div>
+                <div class="d-flex align-center mt-1">
+                  <v-icon size="small" color="error" class="me-1"
+                    >mdi-arrow-down</v-icon
+                  >
+                  <span class="text-caption text-error font-weight-medium"
+                    >3.8% from last month</span
+                  >
                 </div>
               </div>
-              <v-spacer></v-spacer>
-              <v-avatar color="info" rounded size="50" class="elevation-1">
-                <v-icon size="28" color="white">mdi-eye</v-icon>
+              <v-avatar
+                color="info"
+                rounded="lg"
+                size="48"
+                class="d-flex align-center justify-center"
+              >
+                <v-icon size="24" color="white">mdi-eye</v-icon>
               </v-avatar>
             </div>
           </v-card-text>
         </v-card>
       </v-col>
-    </v-row>
+    </VRow>
   </div>
 </template>
 

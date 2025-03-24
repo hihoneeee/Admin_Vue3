@@ -1,7 +1,7 @@
 <template>
-  <v-container>
+  <div>
     <v-card class="mb-5">
-      <v-card-title class="text-h6 py-4 bg-grey-darken-4">
+      <v-card-title class="text-h6 py-4 bg-primary">
         Thêm Người Dùng
       </v-card-title>
       <v-card-text class="pt-4">
@@ -23,6 +23,7 @@
                   placeholder="Nhập họ tên"
                   :error-messages="errorMessage"
                   :class="{
+                    'w-100': true,
                     'is-invalid': meta.touched && errorMessage,
                     'is-valid': meta.touched && !errorMessage,
                   }"
@@ -46,6 +47,7 @@
                   placeholder="example@email.com"
                   :error-messages="errorMessage"
                   :class="{
+                    'w-100': true,
                     'is-invalid': meta.touched && errorMessage,
                     'is-valid': meta.touched && !errorMessage,
                   }"
@@ -72,6 +74,7 @@
                   @click:append-inner="showPassword = !showPassword"
                   :type="showPassword ? 'text' : 'password'"
                   :class="{
+                    'w-100': true,
                     'is-invalid': meta.touched && errorMessage,
                     'is-valid': meta.touched && !errorMessage,
                   }"
@@ -95,6 +98,7 @@
                   placeholder="0912345678"
                   :error-messages="errorMessage"
                   :class="{
+                    'w-100': true,
                     'is-invalid': meta.touched && errorMessage,
                     'is-valid': meta.touched && !errorMessage,
                   }"
@@ -119,6 +123,7 @@
                   placeholder="Chọn vai trò"
                   :error-messages="errorMessage"
                   :class="{
+                    'w-100': true,
                     'is-invalid': meta.touched && errorMessage,
                     'is-valid': meta.touched && !errorMessage,
                   }"
@@ -141,6 +146,7 @@
                   readonly
                   @click="showDatePicker = true"
                   :class="{
+                    'w-100': true,
                     'is-invalid': meta.touched && errorMessage,
                     'is-valid': meta.touched && !errorMessage,
                   }"
@@ -167,6 +173,7 @@
                   :error-messages="errorMessage"
                   rows="3"
                   :class="{
+                    'w-100': true,
                     'is-invalid': meta.touched && errorMessage,
                     'is-valid': meta.touched && !errorMessage,
                   }"
@@ -185,6 +192,7 @@
               Hủy
             </v-btn>
             <v-btn
+              variant="outlined"
               color="primary"
               type="submit"
               :disabled="Object.keys(errors).length > 0"
@@ -195,7 +203,7 @@
         </Form>
       </v-card-text>
     </v-card>
-  </v-container>
+  </div>
 </template>
 
 <script setup>

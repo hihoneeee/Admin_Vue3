@@ -13,20 +13,13 @@
                 v-model="userData.userName"
                 label="Tên người dùng"
                 required
-              ></v-text-field>
+              />
             </v-col>
             <v-col cols="12" sm="6">
-              <v-text-field
-                v-model="userData.email"
-                label="Email"
-                required
-              ></v-text-field>
+              <v-text-field v-model="userData.email" label="Email" required />
             </v-col>
             <v-col cols="12" sm="6">
-              <v-text-field
-                v-model="userData.phone"
-                label="Số điện thoại"
-              ></v-text-field>
+              <v-text-field v-model="userData.phone" label="Số điện thoại" />
             </v-col>
             <v-col cols="12" sm="6">
               <v-select
@@ -34,13 +27,13 @@
                 :items="['Admin', 'User', 'Manager']"
                 label="Vai trò"
                 required
-              ></v-select>
+              />
             </v-col>
           </v-row>
         </v-container>
       </v-card-text>
       <v-card-actions>
-        <v-spacer></v-spacer>
+        <v-spacer />
         <v-btn color="blue-darken-1" variant="text" @click="closeDialog">
           Hủy
         </v-btn>
@@ -52,33 +45,45 @@
   </v-dialog>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch, toRefs } from "vue";
-import { dataUsers } from "@/utils/common.ts";
+import { dataUsers } from "@/utils/common";
 
-const props = defineProps({
-  modelValue: Boolean,
-  userId: {
-    type: [String, Number],
-    default: null,
-  },
-});
+// Định nghĩa interface cho User
+interface User {
+  id: number | string;
+  userName: string;
+  email: string;
+  phone: string;
+  role: string;
+}
 
-const emit = defineEmits(["update:modelValue", "save"]);
+// Định nghĩa props và emits
+const props = defineProps<{
+  modelValue: boolean;
+  userId: string | number | null;
+}>();
+const emit = defineEmits<{
+  (e: "update:modelValue", value: boolean): void;
+  (e: "save", user: User): void;
+}>();
 
+// Lấy giá trị reactive từ props
 const { modelValue, userId } = toRefs(props);
-const dialogVisible = ref(false);
-const userData = ref(null);
 
-// Theo dõi thay đổi của prop modelValue để cập nhật biến local
+// Khai báo các state reactive
+const dialogVisible = ref<boolean>(false);
+const userData = ref<User | null>(null);
+
+// Đồng bộ trạng thái của dialog với props modelValue
 watch(modelValue, (newVal) => {
   dialogVisible.value = newVal;
-  if (newVal && userId.value) {
+  if (newVal && userId.value !== null) {
     loadUserData();
   }
 });
 
-// Theo dõi thay đổi của biến local để emit event
+// Khi dialog đóng, emit sự kiện update và reset dữ liệu
 watch(dialogVisible, (newVal) => {
   emit("update:modelValue", newVal);
   if (!newVal) {
@@ -86,10 +91,11 @@ watch(dialogVisible, (newVal) => {
   }
 });
 
-// Tải dữ liệu người dùng dựa trên ID
-const loadUserData = () => {
+// Hàm tải dữ liệu người dùng dựa trên userId
+const loadUserData = (): void => {
   const user = dataUsers.find((user) => user.id === userId.value);
   if (user) {
+    // Tạo bản sao để tránh thay đổi trực tiếp dữ liệu gốc
     userData.value = { ...user };
   } else {
     console.error("Không tìm thấy người dùng với ID:", userId.value);
@@ -97,16 +103,14 @@ const loadUserData = () => {
   }
 };
 
-// Đóng dialog
-const closeDialog = () => {
+// Hàm đóng dialog
+const closeDialog = (): void => {
   dialogVisible.value = false;
 };
 
-// Lưu thay đổi
-const saveChanges = () => {
+// Hàm lưu thay đổi và emit dữ liệu chỉnh sửa ra ngoài
+const saveChanges = (): void => {
   if (!userData.value) return;
-
-  // Emit event save với dữ liệu đã chỉnh sửa
   emit("save", userData.value);
   closeDialog();
 };
