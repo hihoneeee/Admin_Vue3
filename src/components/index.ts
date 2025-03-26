@@ -12,3 +12,8 @@ export { default as AdminNav } from "@/components/admin/AdminNav.vue";
 //input
 export { default as CustomInput } from "@/components/input/CustomInput.vue";
 export { default as CustomSelect } from "@/components/input/CustomSelect.vue";
+
+//account
+export { default as AccountSettingsMenu } from "@/components/account/AccountSettingsMenu.vue";
+export { default as PersonalInfo } from "@/components/account/PersonalInfo.vue";
+export { default as PrivacyProtection } from "@/components/account/PrivacyProtection.vue";

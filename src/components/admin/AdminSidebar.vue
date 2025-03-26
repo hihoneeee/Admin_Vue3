@@ -48,7 +48,7 @@
                   :prepend-icon="item.icon"
                   :value="item.id"
                   class="rounded my-1"
-                  :active="isGroupActiveById(item.id)"
+                  :active="isGroupActive(item)"
                 >
                   <v-tooltip activator="parent" location="end">
                     {{ item.title }}
@@ -75,7 +75,7 @@
             <v-list-group
               v-else
               :value="item.id"
-              :active="isGroupActiveById(item.id)"
+              :active="isGroupActive(item)"
               class="rounded child-compact"
             >
               <template v-slot:activator="{ props }">
@@ -178,12 +178,16 @@
               rounded="lg"
             ></v-list-item>
             <v-divider class="my-2"></v-divider>
-            <v-list-item
-              title="Account Settings"
-              prepend-icon="mdi-cog-outline"
-              density="comfortable"
-              rounded="lg"
-            ></v-list-item>
+            <router-link to="/admin/account" class="text-decoration-none text-black">
+              <v-list-item
+                title="Account Settings"
+                prepend-icon="mdi-cog-outline"
+                density="comfortable"
+                rounded="lg"
+                class="text-default"
+              ></v-list-item
+            ></router-link>
+
             <v-divider class="my-2"></v-divider>
             <v-list-item
               title="Log Out"
@@ -246,14 +250,9 @@ const mini = computed({
   set: (value) => emit("update:miniSidebar", value),
 });
 
-const isGroupActiveById = (id) => {
-  const item = menuItems.find((item) => item.id === id);
-  if (item && item.children) {
-    return item.children.some(
-      (child) =>
-        currentRoute.value === child.to ||
-        currentRoute.value.startsWith(child.to + "/")
-    );
+const isGroupActive = (item) => {
+  if (item.children) {
+    return item.children.some((child) => currentRoute.value.includes(child.to));
   }
   return false;
 };

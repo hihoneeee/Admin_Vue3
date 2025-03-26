@@ -43,6 +43,17 @@ function buildRoutesFromPages() {
 
     // Kiểm tra nếu route thuộc layout admin
     if (routePath.startsWith("/admin")) {
+      // Xử lý route động cho order/detail
+      if (routePath.includes("/order/detail/[id]")) {
+        layouts.admin.children.push({
+          path: "order/detail/:id",
+          name: "admin-order-detail",
+          component,
+        });
+        console.log("Added dynamic route for order detail");
+        return;
+      }
+
       const childPath =
         routePath.replace("/admin", "").replace(/^\//, "") || "dashboard";
       const routeSegments = routePath.split("/").filter(Boolean);
