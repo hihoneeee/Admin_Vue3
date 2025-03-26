@@ -122,53 +122,9 @@ const hasProducts = computed(() => {
 
     <!-- Filter Card -->
     <v-card flat border class="rounded-lg mb-4 pa-4">
-      <div class="d-flex flex-wrap align-center gap-4" style="gap: 1rem;">
-        <v-select
-          v-model="categoryFilter"
-          :items="categories"
-          label="Danh mục"
-          hide-details
-          density="compact"
-          variant="outlined"
-          rounded="lg"
-          bg-color="surface"
-          class="filter-select"
-          style="min-width: 150px; margin-right: 1rem"
-        ></v-select>
-
-        <v-select
-          v-model="publishFilter"
-          :items="['Tất cả', 'Công khai', 'Bản nháp']"
-          label="Trạng thái"
-          hide-details
-          density="compact"
-          variant="outlined"
-          rounded="lg"
-          bg-color="surface"
-          class="filter-select"
-          style="min-width: 150px; margin-right: 1rem"
-        ></v-select>
-
+      <div class="d-flex flex-wrap align-center gap-4" style="gap: 1rem">
         <div class="d-flex flex-grow-1 align-center">
-          <v-text-field
-            v-model="search"
-            prepend-inner-icon="mdi-magnify"
-            label="Tìm kiếm sản phẩm"
-            single-line
-            hide-details
-            density="compact"
-            variant="outlined"
-            rounded="lg"
-            bg-color="surface"
-            class="flex-grow-1"
-          ></v-text-field>
-
-          <v-btn
-            icon="mdi-eye-outline"
-            variant="text"
-            color="primary"
-            class="ml-2"
-          >
+          <v-btn icon="mdi-eye-outline" variant="text" color="primary">
             <v-menu offset-y>
               <template v-slot:activator="{ props }">
                 <v-btn
@@ -241,7 +197,43 @@ const hasProducts = computed(() => {
               </v-list>
             </v-menu>
           </v-btn>
+          <v-text-field
+            v-model="search"
+            prepend-inner-icon="mdi-magnify"
+            label="Tìm kiếm sản phẩm"
+            single-line 
+            hide-details
+            density="compact"
+            variant="outlined"
+            rounded="lg"
+            bg-color="surface"
+          ></v-text-field>
         </div>
+        <v-select
+          v-model="categoryFilter"
+          :items="categories"
+          label="Danh mục"
+          hide-details
+          density="compact"
+          variant="outlined"
+          rounded="lg"
+          bg-color="surface"
+          class="filter-select"
+          style="min-width: 150px"
+        ></v-select>
+
+        <v-select
+          v-model="publishFilter"
+          :items="['Tất cả', 'Công khai', 'Bản nháp']"
+          label="Trạng thái"
+          hide-details
+          density="compact"
+          variant="outlined"
+          rounded="lg"
+          bg-color="surface"
+          class="filter-select"
+          style="min-width: 150px"
+        ></v-select>
       </div>
     </v-card>
 

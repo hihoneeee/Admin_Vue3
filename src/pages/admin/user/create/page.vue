@@ -184,20 +184,13 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-              color="error"
-              variant="outlined"
-              class="me-3"
-              @click="resetForm"
-            >
-              Hủy
-            </v-btn>
-            <v-btn
               variant="outlined"
               color="primary"
               type="submit"
+              class="text-capitalize"
               :disabled="Object.keys(errors).length > 0"
             >
-              Thêm người dùng
+              THÊM
             </v-btn>
           </v-card-actions>
         </Form>

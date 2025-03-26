@@ -125,12 +125,14 @@ export const menuItems = [
   {
     id: 1,
     title: "Bảng điều khiển",
+    name: "dash-board",
     icon: "mdi-view-dashboard-outline",
     to: "/admin/dash-board",
   },
   {
     id: 2,
     title: "Sản phẩm",
+    name: "product",
     icon: "mdi-store-outline",
     children: [
       {
@@ -146,6 +148,7 @@ export const menuItems = [
   {
     id: 3,
     title: "Người dùng",
+    name: "user",
     icon: "mdi-account-group-outline",
     children: [
       {
@@ -160,13 +163,21 @@ export const menuItems = [
   },
   {
     id: 4,
+    title: "Đơn hàng",
+    name: "order",
+    icon: "mdi-store-outline",
+    to: "/admin/order",
+  },
+  {
+    id: 5,
     title: "Lịch",
+    name: "calendar",
     icon: "mdi-calendar-outline",
     to: "/admin/calendar",
   },
   {
-    id: 5,
     title: "Nhiệm vụ",
+    name: "task",
     icon: "mdi-checkbox-outline",
     to: "/admin/task",
   },

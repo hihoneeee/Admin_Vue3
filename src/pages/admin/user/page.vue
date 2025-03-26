@@ -1,3 +1,65 @@
+<script setup lang="ts">
+import { ref, computed } from "vue";
+import { dataUsers } from "@/utils/common";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { UserEditDialog } from "@/components";
+
+const search = ref("");
+const page = ref(1);
+const roleFilter = ref("Tất cả");
+const editDialog = ref(false);
+const editUserId = ref(null);
+
+const headers = [
+  { title: "Avatar", key: "avatar", sortable: false, align: "start" as const },
+  { title: "ID", key: "id", sortable: true },
+  { title: "Tên", key: "userName", sortable: true },
+  { title: "Email", key: "email", sortable: true },
+  { title: "Số điện thoại", key: "phone", sortable: true },
+  { title: "Vai trò", key: "role", sortable: true },
+  { title: "Hành động", key: "actions", sortable: false, align: "end" as const },
+];
+
+const filteredUsers = computed(() => {
+  if (roleFilter.value === "Tất cả") {
+    return dataUsers;
+  } else {
+    return dataUsers.filter((user) => user.role === roleFilter.value);
+  }
+});
+
+const getRoleColor = (role) => {
+  const colors = {
+    Admin: "primary",
+    User: "info",
+    Manager: "warning",
+  };
+  return colors[role] || "grey";
+};
+
+const openEditModal = (id) => {
+  editUserId.value = id;
+  editDialog.value = true;
+};
+
+const handleSaveUser = (updatedUser) => {
+  const index = dataUsers.findIndex((user) => user.id === updatedUser.id);
+  if (index !== -1) {
+    dataUsers[index] = { ...updatedUser };
+    console.log("Đã cập nhật người dùng:", dataUsers[index]);
+  }
+
+  // Reset ID
+  editUserId.value = null;
+};
+
+const deleteItem = (item) => {
+  console.log("Xóa người dùng:", item.id);
+  // Thêm logic hiển thị dialog xác nhận xóa
+};
+</script>
+
 <template>
   <div>
     <div class="d-flex justify-space-between align-center mb-6">
@@ -101,72 +163,6 @@
     />
   </div>
 </template>
-
-<script setup>
-import { ref, computed } from "vue";
-import { dataUsers } from "@/utils/common.ts";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import {
-  faCirclePlus,
-  faEdit,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
-import { UserEditDialog } from "@/components";
-
-const search = ref("");
-const page = ref(1);
-const roleFilter = ref("Tất cả");
-const editDialog = ref(false);
-const editUserId = ref(null);
-
-const headers = [
-  { title: "Avatar", key: "avatar", sortable: false, align: "start" },
-  { title: "ID", key: "id", sortable: true },
-  { title: "Tên", key: "userName", sortable: true },
-  { title: "Email", key: "email", sortable: true },
-  { title: "Số điện thoại", key: "phone", sortable: true },
-  { title: "Vai trò", key: "role", sortable: true },
-  { title: "Hành động", key: "actions", sortable: false, align: "end" },
-];
-
-const filteredUsers = computed(() => {
-  if (roleFilter.value === "Tất cả") {
-    return dataUsers;
-  } else {
-    return dataUsers.filter((user) => user.role === roleFilter.value);
-  }
-});
-
-const getRoleColor = (role) => {
-  const colors = {
-    Admin: "primary",
-    User: "info",
-    Manager: "warning",
-  };
-  return colors[role] || "grey";
-};
-
-const openEditModal = (id) => {
-  editUserId.value = id;
-  editDialog.value = true;
-};
-
-const handleSaveUser = (updatedUser) => {
-  const index = dataUsers.findIndex((user) => user.id === updatedUser.id);
-  if (index !== -1) {
-    dataUsers[index] = { ...updatedUser };
-    console.log("Đã cập nhật người dùng:", dataUsers[index]);
-  }
-
-  // Reset ID
-  editUserId.value = null;
-};
-
-const deleteItem = (item) => {
-  console.log("Xóa người dùng:", item.id);
-  // Thêm logic hiển thị dialog xác nhận xóa
-};
-</script>
 
 <style scoped>
 .min-width-200 {
