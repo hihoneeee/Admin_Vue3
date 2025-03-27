@@ -63,7 +63,7 @@ export default defineComponent({
                 color="primary"
                 variant="tonal"
                 prepend-icon="mdi-printer"
-                class="rounded-lg text-capitalize"
+                class="rounded-lg text-capitalize text-capitalize text-caption"
               >
                 In máy
               </v-btn>

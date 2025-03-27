@@ -18,7 +18,12 @@ const headers = [
   { title: "Email", key: "email", sortable: true },
   { title: "Số điện thoại", key: "phone", sortable: true },
   { title: "Vai trò", key: "role", sortable: true },
-  { title: "Hành động", key: "actions", sortable: false, align: "end" as const },
+  {
+    title: "Hành động",
+    key: "actions",
+    sortable: false,
+    align: "end" as const,
+  },
 ];
 
 const filteredUsers = computed(() => {
@@ -67,7 +72,7 @@ const deleteItem = (item) => {
       <v-btn
         color="primary"
         prepend-icon="mdi-plus-circle"
-        class="rounded-lg"
+        class="rounded-lg text-capitalize text-caption"
         @click="$router.push('/admin/user/create')"
       >
         Tạo mới

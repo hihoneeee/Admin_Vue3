@@ -113,7 +113,7 @@ const hasProducts = computed(() => {
       <v-btn
         color="primary"
         prepend-icon="mdi-plus-circle"
-        class="rounded-lg"
+        class="rounded-lg text-capitalize text-caption"
         @click="createNewProduct"
       >
         Thêm
@@ -201,7 +201,7 @@ const hasProducts = computed(() => {
             v-model="search"
             prepend-inner-icon="mdi-magnify"
             label="Tìm kiếm sản phẩm"
-            single-line 
+            single-line
             hide-details
             density="compact"
             variant="outlined"
