@@ -7,7 +7,7 @@
           color="primary"
           variant="tonal"
           prepend-icon="mdi-file-export"
-          class="rounded-lg text-capitalize"
+          class="rounded-lg text-capitalize text-capitalize text-caption"
         >
           Xuất
         </v-btn>
@@ -15,7 +15,7 @@
           color="primary"
           variant="tonal"
           prepend-icon="mdi-file-import"
-          class="rounded-lg text-capitalize"
+          class="rounded-lg text-capitalize text-capitalize text-caption"
         >
           Nhập
         </v-btn>

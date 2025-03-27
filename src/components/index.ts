@@ -1,7 +1,7 @@
 //common
 export { default as notFound } from "@/components/common/404.vue";
 export { default as TableEmty } from "@/components/common/table-emty.vue";
-
+export { default as RouterLink } from "@/components/common/RouterLink.vue";
 //user
 export { default as UserEditDialog } from "@/components/user/UserEditDialog.vue";
 
