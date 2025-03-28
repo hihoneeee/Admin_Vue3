@@ -123,17 +123,17 @@
                 inline
                 density="compact"
               >
-                <v-radio value="private" class="ml-2">
+                <v-radio color="primary" value="private" class="ml-2">
                   <template v-slot:label>
                     <span class="text-caption mr-1">Only me</span>
                   </template></v-radio
                 >
-                <v-radio value="followers">
+                <v-radio color="primary" value="followers">
                   <template v-slot:label>
                     <span class="text-caption mr-1">Followers only</span>
                   </template></v-radio
                 >
-                <v-radio value="public">
+                <v-radio color="primary" value="public">
                   <template v-slot:label>
                     <span class="text-caption mr-1">Everyone</span>
                   </template></v-radio

@@ -24,3 +24,22 @@ export const securityKeys = [
     icon: "mdi-cellphone",
   },
 ];
+
+export const devicesKeys = [
+  {
+    id: 1,
+    title: "MacBook Air M1",
+    subTitle: "Dhaka, Bangladesh",
+    status: "",
+    time: "Last logged in at Mar 15, 2:40 pm",
+    icon: "mdi-apple",
+  },
+  {
+    id: 2,
+    title: "Windows Laptop",
+    subTitle: "Dhaka, Bangladesh",
+    status: "Currently logged in",
+    time: "Today at 8:22 am",
+    icon: "mdi-microsoft-windows",
+  },
+];
