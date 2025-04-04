@@ -22,6 +22,9 @@ npm install
 npm run dev
 ```
 
+![image](https://github.com/user-attachments/assets/09c7ee83-0207-47cc-9674-d0d3be066c84)
+
+
 ### Compile and Minify for Production
 
 ```sh
